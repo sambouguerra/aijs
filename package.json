@@ -3,8 +3,7 @@
   "version": "0.0.1",
   "description": "An sample module that shows how to use Mocha, Chai and Istanbul to test and generate coverage for ES6 code.",
   "main": "rectangle.js",
-  "scripts": {
-
+  "scripts": { 
 		"test": "mocha"
 	},
   "repository": {

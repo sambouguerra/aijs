@@ -3,7 +3,6 @@ class Matrix {
 
   constructor(...inputs) {
 		this._data = inputs;
-		// inputs.forEach(i => this._data.push(i) );
   }
 	get data () {
     return this._data;
@@ -30,6 +29,7 @@ class Matrix {
 	getItem(col,row = 0){
 		return this._data[row][col];
 	}
+				
 	setItem(col,row, value){
 		this._data[row][col] = value;
 		return this._data[row][col];
@@ -49,9 +49,14 @@ class Matrix {
 			return new Matrix(tmp);
 
 		let tmp2 = [];
-		for (let j =0; j<rows; j++)
+		for (let j =0; j<rows; j++){
+				tmp = [];
+				for (let i =0; i<cols; i++)
+					tmp.push(0);
 				tmp2.push(tmp);
-		//console.log(tmp2)
+		}
+			
+
 		return new Matrix(...tmp2);
 	}
 
@@ -70,16 +75,26 @@ class Matrix {
 			return new Matrix(tmp);
 
 		let tmp2 = [];
-		for (let j =0; j<rows; j++)
+		for (let j =0; j<rows; j++){
+				tmp = [];
+				for (let i =0; i<cols; i++)
+					tmp.push(1);
 				tmp2.push(tmp);
-		//console.log(tmp2)
+		}
+
 		return new Matrix(...tmp2);
 	}
-
-
-
+	/**
+	 * add
+	 * Static method
+	 * Return return a new Matrix which is the sum of the 2 matrices.
+	 * params: matrix, matrix
+	 */
     static add(m1, m2){
       let dim = m1.shape;
+			if(m1.shape[0] != m2.shape[0] || m1.shape[1] != m2.shape[1])
+				throw ("The provided Matrices have different dimensions")
+			//check if the 2 matrices have the same dimensions
 
       let result = Matrix.zeros(dim[0], dim[1])
       for (let i =0; i<dim[0]; i++){
@@ -89,5 +104,31 @@ class Matrix {
       }
       return result;
     }
+		
+	/**
+	 * dot
+	 * Static method
+	 * Return return a new Matrix which is the dot product of the 2 matrices.
+	 * params: matrix, matrix
+	 */
+		static dot(m1,m2) {
+
+			let m = m1.shape[0]; //  
+			let n = m1.shape[1]; // 
+			let p = m2.shape[0]; //
+			let result = Matrix.zeros(n, p); 
+
+			for(let i = 0; i<n; i++){
+				for(let j=0; j<p; j++){
+					let sum = 0; 
+					for(let k=0; k<m; k++){//3	for() 
+					 	sum += m1.getItem(k,i)*m2.getItem(j,k)
+					}
+					result.setItem(j,i, sum);
+				}
+			}
+			return result;
+		}
+ 
 }
 module.exports =  Matrix;
