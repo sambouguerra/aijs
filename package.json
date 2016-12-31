@@ -1,8 +1,8 @@
 {
-  "name": "datascience.js",
+  "name": "aijs",
   "version": "0.0.1",
-  "description": "....",
-  "main": "rectangle.js",
+  "description": "AI Library for Javascript",
+  "main": "index.js",
   "scripts": {
     "test": "mocha --recursive"
   },
@@ -14,8 +14,6 @@
   "license": "MIT",
   "homepage": "",
   "devDependencies": {
-    "babel-preset-es2015": "^6.18.0",
-    "babel-preset-react": "^6.16.0",
     "mocha": "^3.2.0"
   },
   "directories": {
@@ -23,8 +21,6 @@
     "test": "test"
   },
   "dependencies": {
-    "browser-es-module-loader": "^0.2.0",
-    "es6-module-loader": "^0.17.11"
   },
-  "keywords": []
+  "keywords": ["machine learning", "javascript"]
 }

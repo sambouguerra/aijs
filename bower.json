@@ -1,0 +1,22 @@
+{
+  "name": "mljs",
+  "description": "machine learning in javascript",
+  "main": "index.js",
+  "authors": [
+    "sam Bouguerra"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "machine",
+    "learning",
+    "javascript"
+  ],
+  "homepage": "https://github.com/sambouguerra/mljs",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
