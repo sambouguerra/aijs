@@ -1,5 +1,5 @@
 let path = require('path');
-let Single = require(path.join(__dirname, '..', '../../src/ml/linearRegression/single'));
+let Poly = require(path.join(__dirname, '..', '../../src/ml/linearRegression/poly'));
 
 var assert = require('assert');
 describe('GradientDescent',  () => {
@@ -12,7 +12,7 @@ describe('GradientDescent',  () => {
 		}
 
 		it( 'should return [' + a + ',' + b + '] when calling converge(xx  )'  ,  () => {
-		assert.deepEqual([a,b],Single.converge(x));
+		assert.deepEqual([a,b],Poly.converge(x));
 		});
 	 
   }); 

@@ -1,14 +1,14 @@
- class Single{
+ class Poly{
 
-    cost(b,a,points){
-        let totalError = 0
-        let len = points.length;
-        for (let i =0; i< len ; i++){
-            let error = points[i].y -  (a * points[i].x + b);
-            totalError += Math.pow(error ,2 );
-        }
-        return totalError / (2*len);
-    }
+    // cost(b,a,points){
+    //     let totalError = 0
+    //     let len = points.length;
+    //     for (let i =0; i< len ; i++){
+    //         let error = points[i].y -  (a * points[i].x + b);
+    //         totalError += Math.pow(error ,2 );
+    //     }
+    //     return totalError / (2*len);
+    // }
  
     static stepGradient(b_current, a_current, points, learningRate=0.001) {
         let b_gradient = 0;
@@ -39,7 +39,7 @@
             
             a = converged_a;
             b = converged_b;
-            let converged = Single.stepGradient(b,a,points); 
+            let converged = Poly.stepGradient(b,a,points); 
             converged_a = converged[1];
             converged_b = converged[0];
 
@@ -54,4 +54,4 @@
     }
 }
 
-module.exports =  Single;
+module.exports =  Poly;
