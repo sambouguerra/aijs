@@ -1,5 +1,5 @@
 let path = require('path');
-let Poly = require(path.join(__dirname, '..', '../../src/ml/linearRegression/poly'));
+let Poly = require(path.join(__dirname, '..', '../../src/ml/linearRegression/gradientDescent/poly'));
 
 var assert = require('assert');
 describe('GradientDescent',  () => {
