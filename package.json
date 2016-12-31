@@ -1,11 +1,11 @@
 {
-  "name": "chai-es6-sample",
+  "name": "datascience.js",
   "version": "0.0.1",
-  "description": "An sample module that shows how to use Mocha, Chai and Istanbul to test and generate coverage for ES6 code.",
+  "description": "....",
   "main": "rectangle.js",
-  "scripts": { 
-		"test": "mocha"
-	},
+  "scripts": {
+    "test": "mocha --recursive"
+  },
   "repository": {
     "type": "git",
     "url": ""
@@ -19,8 +19,12 @@
     "mocha": "^3.2.0"
   },
   "directories": {
+    "example": "examples",
     "test": "test"
   },
-  "dependencies": {},
+  "dependencies": {
+    "browser-es-module-loader": "^0.2.0",
+    "es6-module-loader": "^0.17.11"
+  },
   "keywords": []
 }

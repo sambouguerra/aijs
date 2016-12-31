@@ -1,5 +1,5 @@
 let  path = require('path');
-let Matrix = require(path.join(__dirname, '..', '/src/core/matrix'));
+let Matrix = require(path.join(__dirname, '..', '../src/core/matrix'));
 
 var assert = require('assert');
 describe('Matrix',  () => {
