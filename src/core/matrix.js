@@ -1,19 +1,20 @@
 
 class Matrix {
 
-  constructor(...inputs) {
-		this._data = inputs;
-  }
+	constructor(...inputs) {
+			this._data = inputs;
+	}
+	
 	get data () {
-    return this._data;
-  }
+		return this._data;
+	}
 
 	/**
 	 * ndim
 	 * the number of axes (dimensions) of the Matrix
 	 */
 	get ndim() {
-			return this._data.length;
+		return this._data.length;
 	}
 
 	/**
@@ -23,8 +24,14 @@ class Matrix {
 	 * ?? The length of the shape array is therefore the rank, or number of dimensions, ndim.
 	 */
 	get shape() {
-		 this._shape = [this._data[0].length, this._data.length];
-			return this._shape;
+		this._shape = [this._data[0].length, this._data.length];
+		return this._shape;
+	}
+	get cols(){
+		return this.shape[0];
+	}
+	get rows(){
+		return this.shape[1];
 	}
 	getItem(col,row = 0){
 		return this._data[row][col];
@@ -104,11 +111,24 @@ class Matrix {
       }
       return result;
     }
-		
+	/**
+	 * T 
+	 * Static method
+	 * Return the transpose matrix 
+	 * params: matrix
+	 */
+	static T(matrix) { 
+		let result = Matrix.zeros(matrix.rows, matrix.cols);
+		for (let i in matrix.data)
+			for (let j in matrix.data[i])
+				result.setItem(i,j,matrix.getItem(j,i));
+		return result;
+	}
+
 	/**
 	 * dot
 	 * Static method
-	 * Return return a new Matrix which is the dot product of the 2 matrices.
+	 * Return  a new Matrix which is the dot product of the 2 matrices.
 	 * params: matrix, matrix
 	 */
 		static dot(m1,m2) {
@@ -116,6 +136,8 @@ class Matrix {
 			let m = m1.shape[0]; //  
 			let n = m1.shape[1]; // 
 			let p = m2.shape[0]; //
+			if(m1.cols != m2.rows)
+				throw 'The sizes of matrices are not compatible'
 			let result = Matrix.zeros(n, p); 
 
 			for(let i = 0; i<n; i++){

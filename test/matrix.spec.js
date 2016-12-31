@@ -81,22 +81,22 @@ describe('Matrix',  () => {
 			});
 		});
 
- 		describe('multiply', ()  =>{
+ 		describe('dot', ()  =>{
 			var a = new Matrix([1, 2,1], [3, 4,1]);
 			var b = new Matrix([1, 0], [0, 1], [1,1]);
-			it('should return [[ 2,  3], [4, 5]] when running Matrix.multiply(new Matrix([1, 2,1], [3, 4,1]),new Matrix([1, 0], [0, 1], [1,1])).data ',  () => {
-				assert.deepEqual([[ 2,  3], [4, 5]],Matrix.multiply(a,b).data);
+			it('should return [[ 2,  3], [4, 5]] when running Matrix.dot(new Matrix([1, 2,1], [3, 4,1]),new Matrix([1, 0], [0, 1], [1,1])).data ',  () => {
+				assert.deepEqual([[ 2,  3], [4, 5]],Matrix.dot(a,b).data);
 			});
 		});
 
-		// describe('add', ()  =>{
-		// 	var a = new Matrix([1,3,4,1]);
-		// 	var b = new Matrix([1,3,4,0,0]);
-		// 	it('should throw an error when running Matrix.add(new Matrix([1,3]),new Matrix([1,3,4,0,0])).data ',  () => {
- 		// 		assert.throws(Matrix.add(a,b) , "The provided Matrices have different dimensions");
-
-		// 	});
-		// });
+		describe('transpose', ()  =>{
+			var a = new Matrix([1, 2,1], [3, 4,1]);
+			var b = new Matrix([1, 3], [2, 4], [1,1]);
+			it('should return [[1, 3], [2, 4], [1,1]] when running Matrix.T(new Matrix([1, 2,1], [3, 4,1]) ).data ',  () => {
+				assert.deepEqual(b.data,Matrix.T(a).data);
+			});
+		});
+	 
 
 
 });
