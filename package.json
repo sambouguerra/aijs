@@ -1,6 +1,6 @@
 {
   "name": "aijs",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "AI Library for Javascript",
   "main": "index.js",
   "scripts": {
@@ -14,13 +14,16 @@
   "license": "MIT",
   "homepage": "",
   "devDependencies": {
+    "matjs": "0.0.5",
     "mocha": "^3.2.0"
   },
   "directories": {
     "example": "examples",
     "test": "test"
   },
-  "dependencies": {
-  },
-  "keywords": ["machine learning", "javascript"]
+  "dependencies": {},
+  "keywords": [
+    "machine learning",
+    "javascript"
+  ]
 }

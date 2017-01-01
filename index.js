@@ -1,2 +1,4 @@
-let Poly = require( './src/ml/linearRegression/gradientDescent/poly');
- exports.GradDescent = Poly;
+let Univariate = require( './src/ml/linearRegression/gradientDescent/uni');
+exports.GradDescent =  {
+    Uni: Univariate
+};

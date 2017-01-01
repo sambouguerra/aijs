@@ -2,12 +2,13 @@
 
 #To use this package:
 + npm i aijs
++ npm test
 
 #done
-+ Gradient Descent
-    + Polynomial
++ LinearRegression
+    + Univariate
+    + Multivariate
 
 
 #to do next
-+ Gradient Descent
-    + Multinomial
++ Logistic Regression
