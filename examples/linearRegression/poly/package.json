@@ -4,18 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "webpack-dev-server"
   },
-  "author": "",
+  "author": "sam bouguerra",
   "license": "ISC",
   "dependencies": {
     "babel-polyfill": "^6.20.0",
-    "chart.js": "^2.4.0",
-    "chart.js-scatter": "^1.1.4",
-    "d3": "^4.4.0",
     "highcharts": "^5.0.6",
-    "jquery": "^3.1.1",
-    "webpack": "^1.14.0"
+    "jquery": "^3.1.1"
   },
   "devDependencies": {
     "aijs": "0.0.2",
