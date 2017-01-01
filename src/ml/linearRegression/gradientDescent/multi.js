@@ -1,5 +1,4 @@
- 
-let { Matrix } = require("matjs") ;
+  
 let _pointsLength = 0;
 let _pointsLength_2 = 0;
 let _paramsLength = 0;

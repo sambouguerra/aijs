@@ -1,5 +1,5 @@
 {
-  "name": "univariate",
+  "name": "multivariate",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -14,7 +14,7 @@
     "jquery": "^3.1.1"
   },
   "devDependencies": {
-    "aijs": "^0.0.7",
+    "aijs": "^0.0.8",
     "babel-core": "^6.21.0",
     "babel-loader": "^6.2.10",
     "babel-preset-es2015": "^6.18.0", 
