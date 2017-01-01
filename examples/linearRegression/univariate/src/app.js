@@ -1,7 +1,7 @@
 require('babel-polyfill') ; 
-var aijs = require('aijs') ;  
 var $ = require('jquery'); 
 var Highcharts = require('highcharts');
+var aijs =  require('aijs') ;  
 
 let _a = 2.289; 
 let _b = 11.788; 
@@ -11,10 +11,9 @@ for(let i =0; i < 50; i+=1){
     x.push({x: i, y:_a*i+_b + Math.random()* 50})
 }
  
- 
 $( document ).ready(function() {
     
-    var result = aijs.GradDescent.converge(x); 
+    var result = aijs.GradDescent.Univariate.converge(x); 
     
     let x1 = x[0].x;
     let y1 = result[0]*x1 + result[1]; 
@@ -44,16 +43,3 @@ $( document ).ready(function() {
 
 })
  
-
-
-
-
-
-
-
-
-
-
- 
-   
-

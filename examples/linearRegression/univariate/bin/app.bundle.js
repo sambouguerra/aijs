@@ -45,9 +45,9 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	__webpack_require__(1) ; 
-	var aijs = __webpack_require__(298) ;  
-	var $ = __webpack_require__(300); 
-	var Highcharts = __webpack_require__(301);
+	var $ = __webpack_require__(298); 
+	var Highcharts = __webpack_require__(299);
+	var aijs =  __webpack_require__(300) ;  
 
 	let _a = 2.289; 
 	let _b = 11.788; 
@@ -57,10 +57,9 @@
 	    x.push({x: i, y:_a*i+_b + Math.random()* 50})
 	}
 	 
-	 
 	$( document ).ready(function() {
 	    
-	    var result = aijs.GradDescent.converge(x); 
+	    var result = aijs.GradDescent.Univariate.converge(x); 
 	    
 	    let x1 = x[0].x;
 	    let y1 = result[0]*x1 + result[1]; 
@@ -90,20 +89,6 @@
 
 	})
 	 
-
-
-
-
-
-
-
-
-
-
-	 
-	   
-
-
 
 /***/ },
 /* 1 */
@@ -8247,75 +8232,6 @@
 
 /***/ },
 /* 298 */
-/***/ function(module, exports, __webpack_require__) {
-
-	let Poly = __webpack_require__( 299);
-	 exports.GradDescent = Poly;
-
-/***/ },
-/* 299 */
-/***/ function(module, exports) {
-
-	 class Poly{
-
-	    // cost(b,a,points){
-	    //     let totalError = 0
-	    //     let len = points.length;
-	    //     for (let i =0; i< len ; i++){
-	    //         let error = points[i].y -  (a * points[i].x + b);
-	    //         totalError += Math.pow(error ,2 );
-	    //     }
-	    //     return totalError / (2*len);
-	    // }
-	 
-	    static stepGradient(b_current, a_current, points, learningRate=0.001) {
-	        let b_gradient = 0;
-	        let a_gradient = 0;
-	        let len = points.length;
-	        
-	        for (let i=0; i<len; i++) {
-	            let temp = points[i].y - ((a_current*points[i].x) + b_current);
-	           
-	            b_gradient += (-2/len) * temp;
-	            a_gradient += (-2/len) * temp *points[i].x;
-	        } 
-	        let new_b = b_current - (learningRate * b_gradient)
-	        let new_a = a_current - (learningRate * a_gradient)
-	        return [new_b, new_a]
-	    }
-
-	    static converge(points, maxIterations=1000000){
-	        var a = Math.random();
-	        let b = Math.random();
-	        let converged_a = a;
-	        let converged_b = b;
-	        let count = 0;
-	        do {
-	            count++;
-	            if(count > maxIterations)
-	                return console.log("Maximized the number of iterations without conversion")
-	            
-	            a = converged_a;
-	            b = converged_b;
-	            let converged = Poly.stepGradient(b,a,points); 
-	            converged_a = converged[1];
-	            converged_b = converged[0];
-
-
-	        }
-	        while(Math.abs(a-converged_a) > 0.00000000000001 &&Math.abs( b-converged_b) > 0.00000000000001)
-	        // console.log(" a %s b %s converged_a %s converged_b %s ", a, b, converged_a , converged_b)
-	        let roundedA = parseFloat(a.toFixed(6))
-	        let roundedB = parseFloat(b.toFixed(6)) 
-
-	        return [roundedA,roundedB];
-	    }
-	}
-
-	module.exports =  Poly;
-
-/***/ },
-/* 300 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -18541,7 +18457,7 @@
 
 
 /***/ },
-/* 301 */
+/* 299 */
 /***/ function(module, exports) {
 
 	/*
@@ -18928,6 +18844,144 @@
 	f&&f.rules&&C(f.rules,function(f){this.matchResponsiveRule(f,a)},this)};D.prototype.matchResponsiveRule=function(f,v){var l=this.respRules,p=f.condition,d;d=p.callback||function(){return this.chartWidth<=h(p.maxWidth,Number.MAX_VALUE)&&this.chartHeight<=h(p.maxHeight,Number.MAX_VALUE)&&this.chartWidth>=h(p.minWidth,0)&&this.chartHeight>=h(p.minHeight,0)};void 0===f._id&&(f._id=a.uniqueKey());d=d.call(this);!l[f._id]&&d?f.chartOptions&&(l[f._id]=this.currentOptions(f.chartOptions),this.update(f.chartOptions,
 	v)):l[f._id]&&!d&&(this.update(l[f._id],v),delete l[f._id])};D.prototype.currentOptions=function(a){function h(a,d,c){var l,p;for(l in a)if(-1<G(l,["series","xAxis","yAxis"]))for(a[l]=f(a[l]),c[l]=[],p=0;p<a[l].length;p++)c[l][p]={},h(a[l][p],d[l][p],c[l][p]);else I(a[l])?(c[l]={},h(a[l],d[l]||{},c[l])):c[l]=d[l]||null}var l={};h(a,this.options,l);return l}})(L);return L});
 
+
+/***/ },
+/* 300 */
+/***/ function(module, exports, __webpack_require__) {
+
+	let Univariate = __webpack_require__( 301);
+	let Mulivariate = __webpack_require__( 302);
+
+	exports.GradDescent =  { Univariate, Mulivariate};
+
+/***/ },
+/* 301 */
+/***/ function(module, exports) {
+
+	 class Univariate{
+	     
+	    static theta(a,b,x) {
+	        return (a*x) + b;   
+	    }
+	    static stepGradient(b_current, a_current, points, learningRate=0.001) {
+	        let b_gradient = 0;
+	        let a_gradient = 0;
+	        let len = points.length;
+	        
+	        for (let i=0; i<len; i++) {  
+	            let temp = Univariate.theta(a_current, b_current, points[i].x ) - points[i].y ;
+	            b_gradient += (2/len) * temp;
+	            a_gradient += (2/len) * temp *points[i].x;
+	        } 
+	        let new_b = b_current - (learningRate * b_gradient)
+	        let new_a = a_current - (learningRate * a_gradient)
+	        return [new_b, new_a]
+	    }
+
+	    static converge(points, maxIterations=1000000){
+	        let a; let b;
+	        let converged_a = Math.random();
+	        let converged_b = Math.random();
+	        let count = 0;
+	        do {
+	            count++;
+	            if(count > maxIterations)
+	                return console.log("Maximized the number of iterations without conversion")
+	            
+	            a = converged_a;
+	            b = converged_b;
+	            let converged = Univariate.stepGradient(b,a,points); 
+	            converged_a = converged[1];
+	            converged_b = converged[0];
+
+
+	        }
+	        while(Math.abs(a-converged_a) > 0.00000000000001 &&Math.abs( b-converged_b) > 0.00000000000001)
+	        // console.log(" a %s b %s converged_a %s converged_b %s ", a, b, converged_a , converged_b)
+	        let roundedA = parseFloat(a.toFixed(6))
+	        let roundedB = parseFloat(b.toFixed(6)) 
+
+	        return [roundedA,roundedB];
+	    }
+	}
+
+	module.exports =  Univariate;
+
+/***/ },
+/* 302 */
+/***/ function(module, exports) {
+
+	 
+	let _pointsLength = 0;
+	let _pointsLength_2 = 0;
+	let _paramsLength = 0;
+	class Multivariate{
+	    
+	    static theta(params,x) {  
+	        return params.reduce(function(r,a,i){return r+a*x[i]},0);
+	    }
+	    // static stepGradient(b_current, a_current, points, learningRate=0.001) {
+	    static stepGradient( current_params, points, learningRate=0.0001) {
+	        
+	        let gradient_params = Array.from({length: _paramsLength }, (v, k) => 0);  
+	        
+	        for (let i=0; i<_pointsLength; i++) {   
+	            let point_i = points[i];
+	            gradient_params = gradient_params.map(
+	                (v,j) => {
+	                    return v + 
+	                    (_pointsLength_2 * 
+	                    (Multivariate.theta(current_params,point_i.x ) -point_i.y) * 
+	                    point_i.x[j])
+	                }
+	            )
+	        } 
+	        return current_params.map( (v,k) => { return v - learningRate * gradient_params[k];  })
+	         
+	    }
+
+	    static converge(points, maxIterations=100000000){
+	         
+	        // augment x with one at the end
+	        for(let k in points){
+	           points[k].x.push(1)
+	        }
+	        
+	        _pointsLength = points.length;
+	        _pointsLength_2 = .5 *_pointsLength;
+	        _paramsLength = points[0].x.length;
+	         
+	        let params =  []; 
+	        let converged_params = Array.from({length: _paramsLength }, (v, k) => Math.random()); 
+	        let count = 0; 
+	        let done = true;
+	        do {
+	            count++;
+	            if(count > maxIterations)
+	                return console.log("Maximized the number of iterations without conversion") 
+	            params =  [...converged_params]; 
+	            converged_params = Multivariate.stepGradient(params, points);
+
+	            done = true;
+	            var l = _paramsLength;
+	            while(done && l>=0){
+	                if (Math.abs(converged_params[l] - params[l] ) > 0.0000001) 
+	                    done = false;  
+	                l--;
+	            } 
+	            
+	        }
+	        while(!done) ;
+
+	        for(let n in converged_params){
+	            converged_params[n] = parseFloat(converged_params[n].toFixed(3)) 
+	        }  
+	        return converged_params;
+
+	    }
+	}
+
+	module.exports =  Multivariate;
 
 /***/ }
 /******/ ]);
