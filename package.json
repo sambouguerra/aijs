@@ -1,6 +1,6 @@
 {
   "name": "aijs",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "AI Library for Javascript",
   "main": "index.js",
   "scripts": {
