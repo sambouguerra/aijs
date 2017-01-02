@@ -24,7 +24,7 @@ $( document ).ready(function() {
         xAxis: { min: 0, max: 50 },
         yAxis: { min: 0 },
         title: {
-            text: 'Linear Regression ( Polynomial )'
+            text: 'Linear Regression ( Univariate )'
         },
         series: [{
             type: 'line',

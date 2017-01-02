@@ -7,23 +7,24 @@ let _a = 2.289;
 let _b = 11.788; 
 let x = [];
  console.log(aijs.GradDescent)
-for(let i =0; i < 50; i+=1){
-    x.push({x: [i], y:_a*i+_b + Math.random()* 50})
-}
+    for(let i =0; i < 10; i+=1){
+        let k = i ;
+        x.push({x: [k], y:_a*k+_b + Math.random()*5})
+    }
  
 $( document ).ready(function() {
     var result = aijs.GradDescent.Multivariate.converge(x); 
-    console.log("RESULT " + result)
-    let x1 = x[0].x;
+    
+    let x1 = x[0].x[0];
     let y1 = result[0]*x1 + result[1]; 
-    let x2 = x[x.length-1].x;
+    let x2 = 10;
     let y2 = result[0]*x2 + result[1];
- 
+
     Highcharts.chart('linearregression1', {
-        xAxis: { min: 0, max: 50 },
+        xAxis: { min: 0, max: 20 },
         yAxis: { min: 0 },
         title: {
-            text: 'Linear Regression ( Polynomial )'
+            text: 'Linear Regression ( Multivariate )'
         },
         series: [{
             type: 'line',
