@@ -5,7 +5,8 @@ let _paramsLength = 0;
 class Multivariate{
     
     static theta(params,x) {  
-        return params.reduce(function(r,a,i){return r+a*x[i]},0);
+        let thetaX = params.reduce(function(r,a,i){return r+a*x[i]},0);
+        return ( 1 / (1 + Math.exp(-thetaX)) );
     }
     // static stepGradient(b_current, a_current, points, learningRate=0.001) {
     static stepGradient( current_params, points, learningRate=0.000001) {
