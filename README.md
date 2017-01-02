@@ -1,8 +1,12 @@
 # aijs
 
-#To use this package:
-+ npm i aijs
+#To test this package:
 + npm test
+
+
+#To try this package
++ checkout the examples
+
 
 #done
 + LinearRegression
