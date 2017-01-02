@@ -1,4 +1,4 @@
 git add .
-git commit -m "added sub and mul"
+git commit -m "added the multivariate example"
 git push
 npm publish

@@ -8,7 +8,7 @@ class Multivariate{
         return params.reduce(function(r,a,i){return r+a*x[i]},0);
     }
     // static stepGradient(b_current, a_current, points, learningRate=0.001) {
-    static stepGradient( current_params, points, learningRate=0.0001) {
+    static stepGradient( current_params, points, learningRate=0.000001) {
         
         let gradient_params = Array.from({length: _paramsLength }, (v, k) => 0);  
         
@@ -54,14 +54,17 @@ class Multivariate{
             if(count > maxIterations)
                 return console.log("Maximized the number of iterations without conversion") 
             params =  [...converged_params]; 
+            console.log(converged_params)
             converged_params = Multivariate.stepGradient(params, points);
-
+             
             done = true;
-            var l = _paramsLength;
+            var l = _paramsLength-1;
             while(done && l>=0){
                 //console.log(Math.abs(converged_params[l]   ) )
                 if (Math.abs(converged_params[l] - params[l] ) > 0.0000001) 
                     done = false;  
+                else 
+                    console.log( Math.abs(converged_params[l] - params[l] ) );
                 l--;
             } 
             

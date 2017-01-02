@@ -53,7 +53,7 @@
 	let _b = 11.788; 
 	let x = [];
 	 console.log(aijs.GradDescent)
-	    for(let i =0; i < 10; i+=1){
+	    for(let i =0; i < 20; i+=1){
 	        let k = i ;
 	        x.push({x: [k], y:_a*k+_b + Math.random()*5})
 	    }
@@ -63,7 +63,7 @@
 	    
 	    let x1 = x[0].x[0];
 	    let y1 = result[0]*x1 + result[1]; 
-	    let x2 = 10;
+	    let x2 = 20;
 	    let y2 = result[0]*x2 + result[1];
 
 	    Highcharts.chart('linearregression1', {
@@ -18921,7 +18921,7 @@
 	        return params.reduce(function(r,a,i){return r+a*x[i]},0);
 	    }
 	    // static stepGradient(b_current, a_current, points, learningRate=0.001) {
-	    static stepGradient( current_params, points, learningRate=0.0001) {
+	    static stepGradient( current_params, points, learningRate=0.000001) {
 	        
 	        let gradient_params = Array.from({length: _paramsLength }, (v, k) => 0);  
 	        
@@ -18967,14 +18967,17 @@
 	            if(count > maxIterations)
 	                return console.log("Maximized the number of iterations without conversion") 
 	            params =  [...converged_params]; 
+	            // console.log(converged_params)
 	            converged_params = Multivariate.stepGradient(params, points);
-
+	             
 	            done = true;
-	            var l = _paramsLength;
+	            var l = _paramsLength-1;
 	            while(done && l>=0){
 	                //console.log(Math.abs(converged_params[l]   ) )
 	                if (Math.abs(converged_params[l] - params[l] ) > 0.0000001) 
 	                    done = false;  
+	                // else 
+	                //     console.log( Math.abs(converged_params[l] - params[l] ) );
 	                l--;
 	            } 
 	            
