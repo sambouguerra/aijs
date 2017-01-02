@@ -1,7 +1,6 @@
  
 let { Matrix } = require("matjs") ;
 class Multivariate{
-
     
     static theta(params,x) {  
         let t = new Matrix(params);

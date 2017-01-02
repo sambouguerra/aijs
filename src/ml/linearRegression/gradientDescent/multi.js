@@ -23,6 +23,13 @@ class Multivariate{
                 }
             )
         } 
+        
+        if(isNaN(current_params[0]) )
+        { 
+             throw "The numbers got huge and triggered an Error ...."
+        }
+       
+        
         return current_params.map( (v,k) => { return v - learningRate * gradient_params[k];  })
          
     }
@@ -52,6 +59,7 @@ class Multivariate{
             done = true;
             var l = _paramsLength;
             while(done && l>=0){
+                //console.log(Math.abs(converged_params[l]   ) )
                 if (Math.abs(converged_params[l] - params[l] ) > 0.0000001) 
                     done = false;  
                 l--;

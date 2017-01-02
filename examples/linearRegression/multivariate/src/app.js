@@ -6,15 +6,14 @@ var aijs =  require('aijs') ;
 let _a = 2.289; 
 let _b = 11.788; 
 let x = [];
- 
+ console.log(aijs.GradDescent)
 for(let i =0; i < 50; i+=1){
-    x.push({x: i, y:_a*i+_b + Math.random()* 50})
+    x.push({x: [i], y:_a*i+_b + Math.random()* 50})
 }
  
 $( document ).ready(function() {
-    
     var result = aijs.GradDescent.Multivariate.converge(x); 
-    
+    console.log("RESULT " + result)
     let x1 = x[0].x;
     let y1 = result[0]*x1 + result[1]; 
     let x2 = x[x.length-1].x;
