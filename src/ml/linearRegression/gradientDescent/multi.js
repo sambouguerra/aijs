@@ -6,8 +6,9 @@ const MAX_ITERATIONS = 1000000000;
 let m; // The number of examples
 let n; // The number of features
 
-let X = [];
-let Y = [];
+let X = []; // The inputs
+let Y = []; // The output
+
 //M for Multivariate
 class M{ 
 
@@ -46,7 +47,7 @@ class M{
        
         // augment x with one at the end
         for(let k in data){
-           X[k] = [1, ...data[k].x];
+           X[k] = [ ...data[k].x , 1];
            Y[k] = data[k].y; 
         }   
         m = X.length;       //number of examples

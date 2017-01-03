@@ -49,18 +49,29 @@ var assert = require('assert');
 // 		}); 
 //   }); 
   describe('converge Multivariate', ()  =>{
-	  
+ 
 		let _a = 2.289; 
-		let _b = 11.788; 
+		let _b = 11.788;  
+		let _c = 5.708; 
+		let _d = 8.235; 
 
 		let x = [];
 		for(let i =1; i < 20; i+=1){
-			let k =i;
-			let y = _a*k+_b;
-			x.push({x: [k], y:y })
+			let k1 = Math.random();
+			let k2 = Math.random();
+			let k3 = Math.random();
+			let y = _a*k1 +  _b*k2 + _c*k3 + _d;
+			x.push({x: [k1,k2,k3], y:y })
 		} 
 		it( 'should return [' + _b + ',' + _a + '] when calling converge(xx  )'  ,  () => {
-			assert.deepEqual([_b,_a],Multivariate.converge(x));
+			var t = Multivariate.converge(x);
+			// console.log(t)
+			// assert.equal(t[0], _a);
+			// assert.equal(t[1], _b);
+			// assert.equal(t[2], _c);
+			// assert.equal(t[3], _d);
+
+			assert.deepEqual([_a, _b,_c, _d],Multivariate.converge(x));
 		}); 
   }); 
 
