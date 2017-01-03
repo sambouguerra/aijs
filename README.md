@@ -16,3 +16,7 @@
 
 #to do next
 + Logistic Regression
+
+#License
+
+MIT
