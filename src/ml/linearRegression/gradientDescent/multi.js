@@ -1,86 +1,86 @@
-  
-let _pointsLength = 0;
-let _pointsLength_2 = 0;
-let _paramsLength = 0;
-class Multivariate{
-    
-    static theta(params,x) {  
-        return params.reduce(function(r,a,i){return r+a*x[i]},0);
-    }
-    // static stepGradient(b_current, a_current, points, learningRate=0.001) {
-    static stepGradient( current_params, points, learningRate=0.000001) {
-        
-        let gradient_params = Array.from({length: _paramsLength }, (v, k) => 0);  
-        
-        for (let i=0; i<_pointsLength; i++) {   
-            let point_i = points[i];
-            gradient_params = gradient_params.map(
-                (v,j) => {
-                    return v + 
-                    (_pointsLength_2 * 
-                    (Multivariate.theta(current_params,point_i.x ) -point_i.y) * 
-                    point_i.x[j])
-                }
-            )
+
+const MIN_COST =  0.0000001;  
+const LEARNING_RATE = 0.001;
+const MAX_ITERATIONS = 1000000000;
+
+let m; // The number of examples
+let n; // The number of features
+
+let X = [];
+let Y = [];
+//M for Multivariate
+class M{ 
+
+    static cost(params){
+        let totalError = 0;
+        for (let i=0; i<m; i++) { 
+            let er =  (Y[i] - M.dot(params, X[i]) );
+            
+            totalError +=  er * er ;
+            if(totalError > MIN_COST)
+                return totalError;  
         } 
-        
-        if(isNaN(current_params[0]) )
-        { 
-             throw "The numbers got huge and triggered an Error ...."
+        return totalError;
+    }
+    static dot(params,x) {
+        let result = 0;
+        for (let i=0; i<n; i++) { 
+            result += params[i]*x[i]
         }
-       
-        
-        return current_params.map( (v,k) => { return v - learningRate * gradient_params[k];  })
-         
+        return result;
+    } 
+
+    static h(theta, x){
+        return M.dot(theta, x);
     }
 
-    static converge(points, maxIterations=100000000){
-         
-        // augment x with one at the end
-        for(let k in points){
-           points[k].x.push(1)
+    static sum(thetas, j_index){
+        let result = 0;
+        //loop over the m examples
+        for(let i=0; i<m; i++){
+            result += ( M.h(thetas, X[i]) - Y[i] )* X[i][j_index]
         }
-        
-        _pointsLength = points.length;
-        _pointsLength_2 = .5 *_pointsLength;
-        _paramsLength = points[0].x.length;
-         
-        let params =  []; 
-        let converged_params = Array.from({length: _paramsLength }, (v, k) => Math.random()); 
+        return result;
+    }
+    static converge(data, maxIterations=MAX_ITERATIONS){
+       
+        // augment x with one at the end
+        for(let k in data){
+           X[k] = [1, ...data[k].x];
+           Y[k] = data[k].y; 
+        }   
+        m = X.length;       //number of examples
+        n = X[0].length;    //number of features
+
+        //initialize thetas with random variables
+        let thetas = Array.from({length: n }, (v, k) => Math.random()); 
+        let newThetas =  [...thetas];
         let count = 0; 
-        let done = true;
+        let done = false;
+        let LEARNING_RATE_M = LEARNING_RATE/m;
         do {
             count++;
             if(count > maxIterations)
-                return console.log("Maximized the number of iterations without conversion") 
-            params =  [...converged_params]; 
-            console.log(converged_params)
-            converged_params = Multivariate.stepGradient(params, points);
-             
-            done = true;
-            var l = _paramsLength-1;
-            /**
-             * instead of comparing the thetas, we could compare the Costs
-             * by doing J = Sum[i->m](Theta(x)-y)
-             */
-            while(done && l>=0){
-                 
-                if (Math.abs(converged_params[l] - params[l] ) > 0.0000001) 
-                    done = false;  
-                else 
-                    console.log( Math.abs(converged_params[l] - params[l] ) );
-                l--;
-            } 
-            
+                return console.log("Maximized the number of iterations without conversion");
+
+            for (let j=0; j<n; j++){
+               newThetas[j] =  newThetas[j] - LEARNING_RATE_M * M.sum(thetas, j); 
+            }
+            thetas =  [...newThetas];
+            let cost = M.cost(newThetas, X);
+            if(count % 100 == 0){
+               // console.log(cost) ;console.log(newThetas)  
+            }
+               
+            if (Math.abs(cost) < MIN_COST )  done = true;  // Exit  
         }
         while(!done) ;
 
-        for(let n in converged_params){
-            converged_params[n] = parseFloat(converged_params[n].toFixed(3)) 
+         for(let n in thetas){
+            thetas[n] = parseFloat(thetas[n].toFixed(3)) 
         }  
-        return converged_params;
-
+        return thetas; 
     }
 }
 
-module.exports =  Multivariate;
+module.exports =  M;

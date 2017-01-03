@@ -13,7 +13,7 @@ for(let i =0; i < 50; i+=1){
  
 $( document ).ready(function() {
     
-    var result = aijs.GradDescent.Univariate.converge(x); 
+    var result = aijs.LinearRegression.Univariate.converge(x); 
     
     let x1 = x[0].x;
     let y1 = result[0]*x1 + result[1]; 

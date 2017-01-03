@@ -8,14 +8,6 @@ let _paramsLength = 0;
 
 class Multivariate{ 
 
-    static sigmoid(x) {
-        return  1 / (1 + Math.exp(-x) )
-    }
-
-    static hypothesis(params,x) { 
-        return sigmoid(params.reduce(function(r,a,i){return r+a*x[i]},0));
-    } 
-
      
     static cost(params, points){
         let totalError = 0;
@@ -28,7 +20,18 @@ class Multivariate{
         return totalError;
     }
 
-  
+    static sigmoid(x) {
+        return  1 / (1 + Math.exp(-x) )
+    }
+
+    static dot(params,x) { 
+        return params.reduce(function(r,a,i){return r+a*x[i]},0);
+    }
+
+    static hypothesis(params,x) { 
+        return Multivariate.sigmoid(Multivariate.dot(params,x));// params.reduce(function(r,a,i){return r+a*x[i]},0);
+    } 
+
 
     static stepGradient( current_params, points, learningRate=LEARNING_RATE) {
         
