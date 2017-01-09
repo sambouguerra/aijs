@@ -1,18 +1,26 @@
 # aijs
 
-#To test this package:
+[![npm version](https://badge.fury.io/js/aijs.svg)](https://badge.fury.io/js/aijs)
+
+## To test this package:
+
 + npm test
 
 
-#To try this package
-+ checkout the examples
+## To try this package
 
++ Checkout the examples
 
-#done
+## Done
+
 + LinearRegression
     + Univariate
     + Multivariate
 
+## To do next
 
-#to do next
-+ Logistic Regression
++ [ ] Logistic Regression
+
+## License
+
+MIT

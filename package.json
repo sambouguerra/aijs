@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "name": "aijs",
   "version": "0.0.13",
   "description": "AI Library for Javascript",
@@ -26,4 +27,33 @@
     "machine learning",
     "javascript"
   ]
+=======
+    "name": "aijs",
+    "version": "0.0.12",
+    "description": "AI Library for Javascript",
+    "main": "index.js",
+    "scripts": {
+        "test": "mocha --recursive"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/sambouguerra/aijs"
+    },
+    "author": "sam Bouguerra",
+    "license": "MIT",
+    "homepage": "",
+    "devDependencies": {
+        "matjs": "0.0.5",
+        "mocha": "^3.2.0"
+    },
+    "directories": {
+        "example": "examples",
+        "test": "test"
+    },
+    "dependencies": {},
+    "keywords": [
+        "machine learning",
+        "javascript"
+    ]
+>>>>>>> 32a6a8c2c9d1fe0a074984c98ce4ac8ccc4628f1
 }
