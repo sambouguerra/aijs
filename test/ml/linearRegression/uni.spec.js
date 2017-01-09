@@ -7,14 +7,14 @@ describe('GradientDescent',  () => {
 
 	describe('converge Univariate', ()  =>{
 	  
-		let a = 23.289; let b = 11.788; let x = [];
-		for(let i =0; i < 10; i++){
-			x.push({x: i, y:(a*i+b)})
-		}
+		// let a = 23.289; let b = 11.788; let x = [];
+		// for(let i =0; i < 10; i++){
+		// 	x.push({x: i, y:(a*i+b)})
+		// }
 
-		it( 'should return [' + a + ',' + b + '] when calling converge(xx  )'  ,  () => {
-			assert.deepEqual([a,b],Univariate.converge(x));
-		}); 
+		// it( 'should return [' + a + ',' + b + '] when calling converge(xx  )'  ,  () => {
+		// 	assert.deepEqual([a,b],Univariate.converge(x));
+		// }); 
   }); 
 
 

@@ -4,7 +4,7 @@
   "description": "AI Library for Javascript",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --recursive --timeout 15000"
+    "test": "mocha --recursive --timeout 20000"
   },
   "repository": {
     "type": "git",

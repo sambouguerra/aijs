@@ -1,6 +1,6 @@
 
 const MIN_COST =  0.0000001;  
-const LEARNING_RATE = 0.001;
+const LEARNING_RATE = 0.01;
 const MAX_ITERATIONS = 1000000000;
 
 let m; // The number of examples
@@ -31,7 +31,7 @@ class M{
         return result;
     } 
 
-    static h(theta, x){
+    static hypothesis(theta, x){
         return M.dot(theta, x);
     }
 
@@ -39,12 +39,13 @@ class M{
         let result = 0;
         //loop over the m examples
         for(let i=0; i<m; i++){
-            result += ( M.h(thetas, X[i]) - Y[i] )* X[i][j_index]
+            let xi = X[i];
+            result += ( M.hypothesis(thetas, xi) - Y[i] )* xi[j_index]
         }
         return result;
     }
     static converge(data, maxIterations=MAX_ITERATIONS){
-       
+       console.time("dbsave");
         // augment x with one at the end
         for(let k in data){
            X[k] = [ ...data[k].x , 1];
@@ -58,7 +59,9 @@ class M{
         let newThetas =  [...thetas];
         let count = 0; 
         let done = false;
-        let LEARNING_RATE_M = LEARNING_RATE/m;
+        const LEARNING_RATE_M = LEARNING_RATE/m;
+
+        let costCycleJumps = 1000;
         do {
             count++;
             if(count > maxIterations)
@@ -67,19 +70,33 @@ class M{
             for (let j=0; j<n; j++){
                newThetas[j] =  newThetas[j] - LEARNING_RATE_M * M.sum(thetas, j); 
             }
+            // for(let i =0; i<n;i++){
+            //     thetas[i] = newThetas[i]
+            // }
             thetas =  [...newThetas];
             let cost = M.cost(newThetas, X);
-            if(count % 100 == 0){
-               // console.log(cost) ;console.log(newThetas)  
+          
+            let diff = Math.abs(Math.abs(cost) - MIN_COST);
+            if (diff < MIN_COST )  done = true;  // Exit  
+
+            if(costCycleJumps < 0){
+                // console.log(cost) 
+                if (diff < MIN_COST )  done = true;  // Exit  
+                if(diff > .01) costCycleJumps = 100000;
+                else if(diff > .001) costCycleJumps = 10000;
+                else if(diff > .0001) costCycleJumps = 1000;
+
             }
-               
-            if (Math.abs(cost) < MIN_COST )  done = true;  // Exit  
+            costCycleJumps--;
+            
+            
         }
         while(!done) ;
-
+        console.timeEnd("dbsave"); console.time("dbsave");
          for(let n in thetas){
             thetas[n] = parseFloat(thetas[n].toFixed(3)) 
         }  
+         console.timeEnd("dbsave"); console.time("dbsave");
         return thetas; 
     }
 }
